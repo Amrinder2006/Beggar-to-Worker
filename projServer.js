@@ -1,26 +1,10 @@
-const express = require("express");
-const app = express();
-
-// middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// serve frontend
-app.use(express.static("public"));
-
-
-
-
-
-
-
-// ================= SERVER =================
-
-const PORT = process.env.PORT || 2006;
-
-app.listen(PORT, () => {
-    console.log("Server running on port " + PORT);
-});
+var express=require("express");
+var app=express();
+const path=require("path")
+var fileuploader=require("express-fileupload");
+const cloudinary = require("cloudinary").v2;
+var sql=require("mysql2")
+const bcrypt = require("bcrypt");
 cloudinary.config({ 
   cloud_name: 'dlrwcm7ji',
   api_key: '232223482439149',
@@ -67,6 +51,11 @@ MYSQ.connect(function(err){
     }
 })
 app.use(fileuploader())
+app.listen(2006,function() {
+    console.log("Hello World");
+    console.log(__dirname)
+    // console.log(filename)
+})
 
 app.get("/",function (req,resp) {
        resp.sendFile(__dirname+"/public/index.html");
@@ -664,4 +653,3 @@ app.get("/angularfetchBaggers",function(req,resp){
 
   })
 })
-
