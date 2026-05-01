@@ -1,4 +1,10 @@
 {
+  "name": "beggar2worker",
+  "version": "1.0.0",
+  "main": "projserver.js",
+  "scripts": {
+    "start": "node Project/projServer.js"
+  },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "bcrypt": "^6.0.0",
