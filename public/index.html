@@ -1,24 +1,23 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<title>Signup Modal Example</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <head>
+    <meta charset="UTF-8" />
+    <title>Signup Modal Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-
-<style>
-
-/* ===== ORIGINAL ===== */
-.carousel-item {
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .carousel-item {
   height:450px;
   position:relative;
 }
-
 .carousel-img {
   height: 500px;
   object-fit: cover;
-  object-position: center 60%;
+  object-position: center 60%; /* change this if needed */
 }
 
 .carousel-item img {
@@ -46,253 +45,400 @@
   box-shadow:0 4px 15px rgba(0,0,0,0.08);
   transition:0.3s;
 }
-
 .card:hover {
   transform:translateY(-5px);
   box-shadow:0 8px 25px rgba(0,0,0,0.12);
 }
 
+/* Footer */
 .footer {
   background:#343a40;
   color:white;
   padding:30px 0;
 }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-/* ===== MOBILE FIXES ===== */
+    <script>
+      $(document).ready(function () {
+        $("#Create").click(function () {
+          let obj = {
+            method: "post",
+            url: "/submit-process",
+            data: {
+              Username: $("#Username").val(),
+              Email: $("#Email").val(),
+              Password: $("#Password").val(),
+              UserT: $("#UserT").val(),
+            },
+          };
+          $.ajax(obj)
+            .then(function (resp) {
+              alert(resp);
+            })
+            .fail(function (err) {
+              alert(err.message);
+            });
+        });
+        $("#LoginH").click(function () {
+          let obj = {
+            method: "post",
+            url: "/login-process",
+            data: {
+              Email: $("#LEmail").val(),
+              Password: $("#LPassword").val(),
+            },
+          };
+          $.ajax(obj)
+            .then(function (resp) {
+             
+                localStorage.setItem("activeuser", $("#LEmail").val())
+                if(resp=="Volunteer")
+                {localStorage.setItem("activeuser", $("#LEmail").val())
+                  window.location.href="/voldash";
+            }
+                else if(resp=="Citizen")
+                {
+                  localStorage.setItem("activeuser", $("#LEmail").val())
+                  window.location.href="/Citizendash";
+                }  
+                else
+                  alert(resp)
+             
+             
+              
+            })
+            .fail(function (err) {
+              alert("Error Occured");
+            });
+        });
+        $("#AdminH").click(function () {
+          let obj = {
+            method: "post",
+            url: "/admin-process",
+            data: {
+              Email: $("#AEmail").val(),
+              Password: $("#APassword").val(),
+            },
+          };
+          $.ajax(obj)
+            .then(function (resp) {
+              if(resp=="Valid")
+              window.location.href="/admindash";
+            else{
+              alert("Invalid Credentials")
+            }
+            })
+            .fail(function (err) {
+              alert("Error Occured");
+            });
+        });
+      });
+    </script>
+    <style>
+      *{
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  
 
-body {
-  overflow-x: hidden;
-}
+  <body style="background-color: rgb(255, 255, 255);">
+<nav class="navbar px-4 py-2 shadow-sm mb-2" style="background-color:#1f2a44; line-height: 60px;">
 
-.navbar .container-fluid {
-  flex-wrap: wrap;
-}
+  <div class="container-fluid d-flex align-items-center ">
 
-.carousel-item {
-  height: auto !important;
-}
-
-.carousel-img,
-.carousel-item img {
-  height: 250px !important;
-}
-
-@media (min-width:768px){
-  .carousel-item img {
-    height: 450px !important;
-  }
-}
-
-.container.d-flex {
-  flex-wrap: wrap !important;
-  gap: 20px;
-  justify-content: center !important;
-}
-
-.card {
-  width: 100% !important;
-  max-width: 300px;
-}
-
-.card img {
-  width: 100% !important;
-  height: 180px !important;
-  object-fit: cover;
-}
-
-.row.align-items-center {
-  text-align: center;
-}
-
-.row.align-items-center img {
-  max-width: 150px !important;
-  height: auto !important;
-}
-
-iframe {
-  width: 100% !important;
-  max-width: 100% !important;
-  height: 250px !important;
-}
-
-@media (min-width:768px){
-  iframe {
-    height: 400px !important;
-  }
-}
-
-.footer p {
-  padding: 0 10px;
-}
-
-</style>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-<script>
-$(document).ready(function () {
-
-$("#Create").click(function () {
-  $.ajax({
-    method: "post",
-    url: "/submit-process",
-    data: {
-      Username: $("#Username").val(),
-      Email: $("#Email").val(),
-      Password: $("#Password").val(),
-      UserT: $("#UserT").val(),
-    },
-  }).then(resp => alert(resp))
-    .fail(err => alert(err.message));
-});
-
-$("#LoginH").click(function () {
-  $.ajax({
-    method: "post",
-    url: "/login-process",
-    data: {
-      Email: $("#LEmail").val(),
-      Password: $("#LPassword").val(),
-    },
-  }).then(function (resp) {
-
-    localStorage.setItem("activeuser", $("#LEmail").val());
-
-    if(resp=="Volunteer"){
-      window.location.href="/voldash";
-    }
-    else if(resp=="Citizen"){
-      window.location.href="/Citizendash";
-    }
-    else{
-      alert(resp);
-    }
-
-  }).fail(() => alert("Error Occured"));
-});
-
-$("#AdminH").click(function () {
-  $.ajax({
-    method: "post",
-    url: "/admin-process",
-    data: {
-      Email: $("#AEmail").val(),
-      Password: $("#APassword").val(),
-    },
-  }).then(function (resp) {
-    if(resp=="Valid")
-      window.location.href="/admindash";
-    else
-      alert("Invalid Credentials");
-  }).fail(() => alert("Error Occured"));
-});
-
-});
-</script>
-
-<style>
-*{ margin:0; padding:0; }
-</style>
-
-</head>
-
-<body style="background-color: rgb(255, 255, 255);">
-
-<nav class="navbar px-4 py-2 shadow-sm mb-2" style="background-color:#1f2a44;">
-  <div class="container-fluid d-flex align-items-center">
-
+ 
     <div class="d-flex align-items-center">
       <img src="https://image2url.com/r2/default/images/1771851558508-3b4fd333-800f-48c2-99a3-6f3421bb38be.png"
-           width="45" height="45">
+           width="45" height="45" alt="">
       <span class="ms-2 fs-4 fw-semibold text-white">
         Beggar 2 Workers
       </span>
     </div>
 
+
     <div class="ms-auto">
-      <button class="btn btn-primary me-2 px-3" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</button>
-      <button class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-      <button class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#AdminModal">Admin</button>
+      <button class="btn btn-primary me-2 px-3" data-bs-toggle="modal" data-bs-target="#signupModal">
+        Signup
+      </button>
+      <button class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#loginModal">
+        Login
+      </button>
+      <button class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#AdminModal">
+        Admin
+      </button>
     </div>
 
   </div>
+
 </nav>
 
 <div class="container">
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="https://pub-1407f82391df4ab1951418d04be76914.r2.dev/uploads/121bd807-b629-4e3e-a3dd-af28f5550690.png">
+      <img class="d-block w-100" src="https://pub-1407f82391df4ab1951418d04be76914.r2.dev/uploads/121bd807-b629-4e3e-a3dd-af28f5550690.png" alt="First slide" height="500" >
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="https://www.image2url.com/r2/default/images/1777627456800-442f9838-70b5-4cc1-8f17-0707af13e25a.png">
+      <img class="d-block w-100" src="https://www.image2url.com/r2/default/images/1777627456800-442f9838-70b5-4cc1-8f17-0707af13e25a.png" alt="Second slide" height="500"  >
     </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon bg-dark rounded " aria-hidden="true" ></span>
+   
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon bg-dark rounded"   ></span>
+  
+  </a>
+</div>
+</div>
+<div class="container">
+  <h2 class="text-center mb-4 fw-bold my-3" >Our Services</h2>
+  </div>
+<div class="container d-flex justify-content-around">
+<div class="card" style="width: 18rem;">
+  <img src="https://img.freepik.com/premium-vector/skills-icon-with-research-sign-skills-icon-explore-find-inspect-symbol-vector-icon_775815-967.jpg?w=2000" width="200px" height="200px" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Skill Identification</h5>
+    <p class="card-text">We help identify hidden talents and skills in individuals, enabling them to move beyond begging and explore meaningful job opportunities.</p>
+    
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="https://cdn0.iconfinder.com/data/icons/aami-web-internet/64/aami15-31-1024.png" class="card-img-top" width="200px" height="200px" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Job Opportunities</h5>
+    <p class="card-text">Our platform connects individuals with small jobs, daily wage work, and local employment options to help them earn with dignity.</p>
+    
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="https://image2url.com/r2/default/images/1774957116402-1ee78151-c081-46d9-b31b-bd291304a689.png" class="card-img-top" width="200px" height="200px" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Rehabilitation Support</h5>
+    <p class="card-text">We provide guidance, resources, and support to help individuals transition into a stable lifestyle and become self-reliant.</p>
+    
   </div>
 </div>
 </div>
 
-<div class="container">
-<h2 class="text-center mb-4 fw-bold my-3">Our Services</h2>
-</div>
+<div class="container my-5 ">
 
-<div class="container d-flex justify-content-around">
+ 
+  <h2 class="text-center mb-4 fw-bold " >Meet Our Developer</h2>
 
-<div class="card">
-<img src="https://img.freepik.com/premium-vector/skills-icon-with-research-sign-skills-icon-explore-find-inspect-symbol-vector-icon_775815-967.jpg?w=2000">
-<div class="card-body">
-<h5>Skill Identification</h5>
-<p>We help identify hidden talents and skills in individuals.</p>
-</div>
-</div>
+  <div class="row align-items-center">
 
-<div class="card">
-<img src="https://cdn0.iconfinder.com/data/icons/aami-web-internet/64/aami15-31-1024.png">
-<div class="card-body">
-<h5>Job Opportunities</h5>
-<p>Connecting individuals with real work opportunities.</p>
-</div>
-</div>
 
-<div class="card">
-<img src="https://image2url.com/r2/default/images/1774957116402-1ee78151-c081-46d9-b31b-bd291304a689.png">
-<div class="card-body">
-<h5>Rehabilitation Support</h5>
-<p>Helping people become self-reliant.</p>
-</div>
-</div>
+    <div class="col-md-4 text-center ">
+      <img src="https://image2url.com/r2/default/images/1774958017927-14f19e2d-95c1-4402-a8bb-ac8d87f7591e.jpeg" 
+           class="rounded-circle shadow" 
+           style="max-height:300px;" 
+           alt="" width="200" height="200">
+    </div>
+
+   
+    <div class="col-md-8">
+      <h4 class="fw-bold p-1">Amrinder Singh</h4>
+      <p class="p-1"><strong>Age:</strong> 20</p>
+      <p class="p-1"><strong>Contact:</strong> +91-9779652928</p>
+      <p class="p-1"><strong>Role:</strong> Full Stack Developer</p>
+
+    </div>
+
+  </div>
 
 </div>
 
-<div class="container my-5">
-<h2 class="text-center mb-4 fw-bold">Meet Our Developer</h2>
-<div class="row align-items-center">
+<div class="container my-5 ">
+  <h2 class="text-center mb-4 fw-bold " >Reach Us</h2>
+      <center>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d558.5561204654421!2d74.95767490394852!3d30.2160013378193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391732b038353191%3A0x2ec172b19aeaef9f!2s12123%2C%20Guru%20Teg%20Bahadar%20Nagar%2C%20Shaibzada%20Jujhar%20Singh%20Nagar%2C%20Bathinda%2C%20Punjab%20151001!5e0!3m2!1sen!2sin!4v1767078189553!5m2!1sen!2sin" width="1000" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </center>
+</div>
+<!-- CONTACT SECTION -->
+<div class="contact-section py-5">
+  <div class="container text-center">
 
-<div class="col-md-4 text-center">
-<img src="https://image2url.com/r2/default/images/1774958017927-14f19e2d-95c1-4402-a8bb-ac8d87f7591e.jpeg" class="rounded-circle shadow">
+    <h2 class="fw-bold mb-5">Contact Us</h2>
+
+    <div class="row justify-content-center g-4">
+
+      <!-- Phone -->
+      <div class="col-md-4">
+        <div class="contact-card">
+          <div class="icon-circle bg-danger">📞</div>
+          <h6 class="mt-3 mb-1">Phone</h6>
+          <p class="mb-0">+91-9779652928</p>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="col-md-4">
+        <div class="contact-card">
+          <div class="icon-circle bg-primary">📧</div>
+          <h6 class="mt-3 mb-1">Email</h6>
+          <p class="mb-0">support@beggar2worker.com</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 </div>
 
-<div class="col-md-8">
-<h4>Amrinder Singh</h4>
-<p>Age: 20</p>
-<p>Contact: +91-9779652928</p>
-<p>Role: Full Stack Developer</p>
-</div>
-
-</div>
-</div>
-
-<div class="container my-5">
-<h2 class="text-center mb-4 fw-bold">Reach Us</h2>
-<center>
-<iframe src="https://www.google.com/maps/embed?..."></iframe>
-</center>
-</div>
-
+<!-- FOOTER -->
 <div class="footer text-center py-5">
-<h4>Beggar 2 Worker</h4>
-<p>© 2026 All rights reserved</p>
-</div>
+  <div class="container">
 
-</body>
+    <h4 class="fw-bold mb-3">Beggar 2 Worker</h4>
+
+    <p class="mb-3 px-md-5">
+      Empowering individuals to move from begging to meaningful work through
+      opportunities, support, and dignity-driven initiatives.
+    </p>
+
+    <div class="footer-divider"></div>
+
+    <p class="mt-3 mb-0 small">© 2026 Beggar 2 Worker. All rights reserved.</p>
+
+  </div>
+</div> 
+
+
+    <div class="modal fade" id="signupModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create Account</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="signupForm">
+              <input
+                type="text"
+                class="form-control mb-3"
+                placeholder="Username"
+                id="Username"
+                required
+              />
+              <input
+                type="email"
+                class="form-control mb-3"
+                placeholder="Email"
+                id="Email"
+                required
+              />
+              <input
+                type="password"
+                class="form-control mb-3"
+                placeholder="Password"
+                id="Password"
+                required
+              />
+              <select class="form-select mb-3" id="UserT" required>
+                <option value="" disabled selected>Select User Type</option>
+                <option value="Volunteer">Volunteer</option>
+                <option value="Citizen">Citizen</option>
+              </select>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary w-100"
+              form="signupForm"
+              id="Create"
+            >
+              Create Account
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="loginModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Login</h5>
+            <div type="button" class="btn-close" data-bs-dismiss="modal"></div>
+          </div>
+          <div class="modal-body">
+            <form id="signupForm">
+              <input
+                type="email"
+                class="form-control mb-3"
+                placeholder="Email"
+                id="LEmail"
+                required/>
+              <input
+                type="password"
+                class="form-control mb-3"
+                placeholder="Password"
+                id="LPassword"
+                required
+              />
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-primary w-100"
+                  form="signupForm"
+                  id="LoginH"
+                >
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="AdminModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Admin Login</h5>
+            <div type="button" class="btn-close" data-bs-dismiss="modal"></div>
+          </div>
+          <div class="modal-body">
+            <form id="signupForm">
+              <input
+                type="email"
+                class="form-control mb-3"
+                placeholder="AdminEmail"
+                id="AEmail"
+                required/>
+              <input
+                type="password"
+                class="form-control mb-3"
+                placeholder="Password"
+                id="APassword"
+                required
+              />
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-primary w-100"
+                  form="signupForm"
+                  id="AdminH"
+                >
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
