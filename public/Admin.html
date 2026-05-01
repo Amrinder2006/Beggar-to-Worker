@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volunteer Dashboard</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <style>
+    body {
+      background: #f5f7fa;
+    }
+
+    .navbar {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .dashboard-title {
+      font-weight: 700;
+      text-decoration: underline;
+      font-size: 1.3rem;
+    }
+
+    .card {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    .card img {
+      border-radius: 50%;
+      border: 2px solid #eee;
+      padding: 5px;
+      background: white;
+    }
+
+    .btn {
+      border-radius: 8px;
+      font-weight: 500;
+    }
+  </style>
+
+  <script>
+    $(document).ready(function(){
+      $("#change").click(function(){
+        let obj={
+          method:"get",
+          url:"/chngpass",
+          data:{
+            Email:$("#Email").val(),
+            oldpass:$("#oldpass").val(),
+            newpass:$("#newpass").val()      
+          }
+        }
+
+        $.ajax(obj).then(function(resp){
+          alert(resp);
+        }).fail(function(err){
+          alert(err.message);
+        })
+      })
+    })
+  </script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-light bg-white justify-content-center">
+  <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+    <img src="https://image2url.com/r2/default/images/1771851558508-3b4fd333-800f-48c2-99a3-6f3421bb38be.png"
+         width="45" height="45" />
+    <span class="dashboard-title">Beggar to Worker</span>
+  </a>
+</nav>
+
+<div class="container py-5">
+  <form method="get">
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- Users -->
+      <div class="col-md-4 col-lg-3">
+        <div class="card text-center p-3">
+          <h5 class="mb-3">Users Manager</h5>
+          <img src="https://st2.depositphotos.com/1006318/5909/v/450/depositphotos_59094701-stock-illustration-businessman-profile-icon.jpg"
+               width="150" height="150" class="mx-auto mb-3"/>
+          <input type="submit" class="btn btn-primary w-100"
+                 formaction="/allusers" value="Users Manager">
+        </div>
+      </div>
+
+      <!-- Volunteers -->
+      <div class="col-md-4 col-lg-3">
+        <div class="card text-center p-3">
+          <h5 class="mb-3">Volunteers</h5>
+          <img src="https://image2url.com/r2/default/images/1772464726685-4026f98f-a577-45f7-b135-67c055afc444.png"
+               width="150" height="150" class="mx-auto mb-3"/>
+          <input type="submit" class="btn btn-primary w-100"
+                 formaction="/allvol" value="Volunteers">
+        </div>
+      </div>
+
+      <!-- Citizens -->
+      <div class="col-md-4 col-lg-3">
+        <div class="card text-center p-3">
+          <h5 class="mb-3">Citizens</h5>
+          <img src="http://getdrawings.com/free-icon/cool-profile-icons-51.png"
+               width="150" height="150" class="mx-auto mb-3"/>
+          <input type="submit" class="btn btn-primary w-100"
+                 formaction="/allcit" value="Citizens">
+        </div>
+      </div>
+
+      <!-- Beggars -->
+      <div class="col-md-4 col-lg-3">
+        <div class="card text-center p-3">
+          <h5 class="mb-3">Beggars</h5>
+          <img src="https://cdn-icons-png.flaticon.com/512/4888/4888756.png"
+               width="150" height="150" class="mx-auto mb-3"/>
+          <input type="submit" class="btn btn-primary w-100"
+                 formaction="/allbeg" value="Beggars">
+        </div>
+      </div>
+
+      <!-- Logout -->
+      <div class="col-md-4 col-lg-3">
+        <div class="card text-center p-3">
+          <h5 class="mb-3">Log Out</h5>
+          <img src="https://st2.depositphotos.com/4103319/6625/i/950/depositphotos_66251761-stock-photo-logout-circular-icon-on-white.jpg"
+               width="150" height="150" class="mx-auto mb-3"/>
+          <button class="btn btn-danger w-100"
+                  data-bs-toggle="modal"
+                  data-bs-target="#changeModal" formaction="/">
+            Log Out
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+</div>
+
+</body>
+</html>

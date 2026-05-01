@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volunteer Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<style>
+body { background:#f5f7fa; }
+
+.navbar {
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.brand-title {
+  font-weight:700;
+  font-size:1.3rem;
+  text-decoration:underline;
+}
+
+.card {
+  border:none;
+  border-radius:16px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+
+.card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 8px 25px rgba(0,0,0,0.12);
+}
+
+.card img {
+  border-radius:50%;
+  border:2px solid #eee;
+  padding:5px;
+  background:white;
+}
+
+.btn {
+  border-radius:8px;
+}
+</style>
+
+<script>
+$(document).ready(function(){
+  let email=localStorage.getItem("activeuser");
+  $("#emaill").html(email);
+
+  $("#change").click(function(){
+    $.ajax({
+      method:"get",
+      url:"/chngpass",
+      data:{
+        Email:$("#Email").val(),
+        oldpass:$("#oldpass").val(),
+        newpass:$("#newpass").val()
+      }
+    }).then(resp=>alert(resp));
+  });
+});
+</script>
+</head>
+
+<body>
+
+<nav class="navbar bg-white px-4 d-flex justify-content-between">
+  <div class="d-flex align-items-center gap-2">
+    <img src="https://image2url.com/r2/default/images/1771851558508-3b4fd333-800f-48c2-99a3-6f3421bb38be.png" width="45">
+    <span class="brand-title">Beggar to Worker</span>
+  </div>
+
+  <div class="d-flex align-items-center gap-2">
+    <img src="https://image2url.com/r2/default/images/1775562336209-73e1be2a-7b2e-4cf4-b6a5-7b1189bdc0fb.png" width="30">
+    <span id="emaill" class="fw-bold"></span>
+  </div>
+</nav>
+
+<div class="container py-5">
+<div class="row g-4 justify-content-center">
+
+<!-- Card Template -->
+<div class="col-md-4 col-lg-3">
+  <div class="card text-center p-3">
+    <h5>Profile</h5>
+    <img src="https://st2.depositphotos.com/1006318/5909/v/450/depositphotos_59094701-stock-illustration-businessman-profile-icon.jpg" width="140" class="mx-auto my-3">
+    <a href="/volunteercred" class="btn btn-primary w-100">Open</a>
+  </div>
+</div>
+
+<div class="col-md-4 col-lg-3">
+  <div class="card text-center p-3">
+    <h5>Beggar Details</h5>
+    <img src="https://image2url.com/r2/default/images/1771851671294-0d8c96d3-d591-414f-b8a3-eb9058c2c37b.png" width="140" class="mx-auto my-3">
+    <a href="/Beggarcred" class="btn btn-primary w-100">Open</a>
+  </div>
+</div>
+
+<div class="col-md-4 col-lg-3">
+  <div class="card text-center p-3">
+    <h5>Beggar Finder</h5>
+    <img src="https://static.vecteezy.com/system/resources/previews/016/329/823/original/3d-illustration-business-manager-png.png" width="140" class="mx-auto my-3">
+    <a href="/find" class="btn btn-primary w-100">Find</a>
+  </div>
+</div>
+
+<div class="col-md-4 col-lg-3">
+  <div class="card text-center p-3">
+    <h5>Settings</h5>
+    <img src="https://image2url.com/r2/default/images/1771851752329-43581042-2d3d-407e-a18e-5e02cae28c52.webp" width="140" class="mx-auto my-3">
+    <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#changeModal">Open</button>
+  </div>
+</div>
+
+<div class="col-md-4 col-lg-3">
+  <div class="card text-center p-3">
+    <h5>Logout</h5>
+    <img src="https://static.vecteezy.com/system/resources/previews/019/078/821/original/logout-simple-flat-icon-illustration-vector.jpg" width="140" class="mx-auto my-3">
+    <a href="/" class="btn btn-danger w-100">Logout</a>
+  </div>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>
