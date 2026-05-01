@@ -4,8 +4,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static("public")); // if your HTML is inside public
+app.use(express.static("public")); // serve frontend
 
+// TEST ROUTE
 app.post("/admin-process", (req, res) => {
     let Email = req.body.Email;
     let Password = req.body.Password;
