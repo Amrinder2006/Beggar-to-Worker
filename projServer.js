@@ -1,13 +1,14 @@
 const express = require("express");
 const app = express();
-app.use(express.static("public"));
 
+// middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static("public")); // serve frontend
+// serve frontend
+app.use(express.static("public"));
 
-// TEST ROUTE
+// admin route
 app.post("/admin-process", (req, res) => {
     let Email = req.body.Email;
     let Password = req.body.Password;
@@ -19,6 +20,7 @@ app.post("/admin-process", (req, res) => {
     }
 });
 
+// server start
 const PORT = process.env.PORT || 2006;
 
 app.listen(PORT, () => {
