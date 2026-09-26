@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+server/.env
+server/node_modules/
+server/upload/
+node_modules/
+dist/
