@@ -1,0 +1,32 @@
+body {
+  background: #f5f7fa;
+}
+
+.navbar {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.brand-title {
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-decoration: underline;
+}
+
+.voldash-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;
+}
+
+.voldash-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.voldash-card img {
+  border-radius: 50%;
+  border: 2px solid #eee;
+  padding: 5px;
+  background: white;
+}

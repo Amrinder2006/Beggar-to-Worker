@@ -1,0 +1,52 @@
+.records-page {
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+.records-page .header-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.records-page .table-card {
+  background: white;
+  border: none;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.records-page table th {
+  background: #0d6efd;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.records-page table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.records-page tbody tr:hover {
+  background: #f1f5ff;
+  transition: 0.2s;
+}
+
+.records-page .btn-fetch {
+  padding: 10px 25px;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.records-page .btn-action {
+  border-radius: 6px;
+  font-size: 14px;
+  padding: 6px 12px;
+}
+
+.records-page a {
+  text-decoration: none;
+  font-weight: 500;
+}

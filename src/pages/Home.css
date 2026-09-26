@@ -1,0 +1,554 @@
+/* Scoped to the Home page. Bootstrap CSS/JS still come from index.html (CDN or npm import) — see notes below. */
+
+.home-page {
+  --primary: #1f2a44;
+  --primary-light: #2f4168;
+  --accent: #f97316;
+  --accent-dark: #ea580c;
+  --light: #f8fafc;
+  --text: #172033;
+  --muted: #64748b;
+  --white: #ffffff;
+  --border: #e2e8f0;
+
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: #ffffff;
+  line-height: 1.6;
+}
+
+/* ================= NAVBAR ================= */
+
+.main-navbar {
+  background: rgba(31, 42, 68, 0.98);
+  min-height: 72px;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.brand img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  margin-right: 12px;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 9px 20px;
+  font-weight: 600;
+  color: white;
+  background: transparent;
+  transition: all 0.25s ease;
+}
+
+.nav-btn:hover {
+  background: white;
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.nav-btn.signup {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.nav-btn.signup:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  color: white;
+}
+
+/* ================= HERO ================= */
+
+.hero-section {
+  padding: 24px 0 0;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.hero-carousel {
+  max-width: 1250px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.18);
+}
+
+.hero-carousel .carousel-item {
+  height: 510px;
+  background: #172033;
+}
+
+.hero-carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-carousel .carousel-control-prev,
+.hero-carousel .carousel-control-next {
+  width: 55px;
+  height: 55px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 50%;
+  margin: 0 20px;
+  opacity: 0.9;
+}
+
+.hero-carousel .carousel-control-prev:hover,
+.hero-carousel .carousel-control-next:hover {
+  background: rgba(249, 115, 22, 0.9);
+}
+
+/* ================= COMMON SECTION ================= */
+
+.home-page .section {
+  padding: 80px 0;
+}
+
+.section-light {
+  background: var(--light);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  max-width: 700px;
+  margin: 0 auto 45px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.section-heading-line {
+  width: 60px;
+  height: 4px;
+  border-radius: 10px;
+  background: var(--accent);
+  margin: 0 auto 45px;
+}
+
+/* ================= SERVICES ================= */
+
+.service-card {
+  height: 100%;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.13);
+}
+
+/* CHANGED: the three source icons (colorful outline, flat black badge, flat
+   black silhouette) were all visually different styles, which made the
+   section look like mismatched stock clip-art. Wrapping each in the same
+   colored circular badge unifies them regardless of the icon's own style,
+   and echoes the accent color used in the navbar/hero for consistency. */
+.service-image-wrapper {
+  height: 200px;
+  padding: 0;
+  background: linear-gradient(180deg, var(--light) 0%, #eef2f7 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.service-icon-badge {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid rgba(249, 115, 22, 0.18);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.service-card:hover .service-icon-badge {
+  transform: scale(1.06);
+  border-color: var(--accent);
+}
+
+.service-image-wrapper img {
+  width: 78px;
+  height: 78px;
+  object-fit: contain;
+  /* Normalizes mixed-color source icons (colorful + solid black) to a single
+     consistent tone so they read as one icon set instead of three unrelated
+     images. Remove this filter if you swap in a matching icon set later. */
+  filter: grayscale(1) brightness(0) saturate(100%) invert(20%) sepia(15%)
+    saturate(900%) hue-rotate(180deg) brightness(95%) contrast(90%);
+  opacity: 0.9;
+}
+
+.service-content {
+  padding: 28px 25px 30px;
+  text-align: center;
+}
+
+.service-content h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.service-content p {
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+/* ================= DEVELOPER ================= */
+
+.developer-card {
+  max-width: 950px;
+  margin: auto;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 45px;
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+}
+
+.developer-image {
+  width: 220px;
+  height: 220px;
+  object-fit: full;
+  border-radius: 50%;
+  border: 7px solid white;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+}
+
+.developer-name {
+  color: var(--primary);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 25px;
+}
+
+.developer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.developer-info p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.developer-info strong {
+  color: var(--text);
+  display: inline-block;
+  width: 90px;
+}
+
+.role-badge {
+  display: inline-block;
+  background: #fff7ed;
+  color: var(--accent-dark);
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+/* ================= MAP ================= */
+
+.map-wrapper {
+  max-width: 1050px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.map-wrapper iframe {
+  display: block;
+  width: 100%;
+  height: 430px;
+  border: 0;
+}
+
+/* ================= CONTACT ================= */
+
+.contact-section {
+  background: var(--light);
+}
+
+.contact-card {
+  height: 100%;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 35px 25px;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+  transition: transform 0.25s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+}
+
+.contact-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  font-size: 1.4rem;
+  color: white;
+}
+
+.phone-icon {
+  background: #dc3545;
+}
+
+.email-icon {
+  background: #2563eb;
+}
+
+.contact-card h3 {
+  font-size: 1.15rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.contact-card p {
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+  background: var(--primary);
+  color: white;
+  padding: 50px 0 25px;
+}
+
+.footer-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.footer-description {
+  max-width: 650px;
+  margin: auto;
+  color: #cbd5e1;
+}
+
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 30px 0 20px;
+}
+
+.copyright {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+/* ================= MODALS ================= */
+
+.home-page .modal-content {
+  border: none;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 25px 70px rgba(15, 23, 42, 0.25);
+}
+
+.home-page .modal-header {
+  background: var(--primary);
+  color: white;
+  padding: 20px 25px;
+  border: none;
+}
+
+.home-page .modal-header .btn-close {
+  filter: brightness(0) invert(1);
+}
+
+.home-page .modal-title {
+  font-weight: 700;
+}
+
+.home-page .modal-body {
+  padding: 30px;
+}
+
+.home-page .modal-footer {
+  padding: 0 30px 30px;
+  border: none;
+}
+
+.home-page .form-control,
+.home-page .form-select {
+  min-height: 48px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 10px 14px;
+}
+
+.home-page .form-control:focus,
+.home-page .form-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+}
+
+.modal-submit {
+  background: var(--accent);
+  border: none;
+  min-height: 48px;
+  border-radius: 9px;
+  font-weight: 700;
+}
+
+.modal-submit:hover {
+  background: var(--accent-dark);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .main-navbar {
+    padding: 10px 0;
+  }
+
+  .brand {
+    font-size: 1.1rem;
+  }
+
+  .brand img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-actions {
+    gap: 5px;
+  }
+
+  .nav-btn {
+    padding: 7px 10px;
+    font-size: 0.85rem;
+  }
+
+  .hero-carousel .carousel-item {
+    height: 300px;
+  }
+
+  .hero-carousel .carousel-control-prev,
+  .hero-carousel .carousel-control-next {
+    width: 42px;
+    height: 42px;
+    margin: 0 10px;
+  }
+
+  .home-page .section {
+    padding: 55px 0;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .service-image-wrapper {
+    height: 170px;
+  }
+
+  .service-icon-badge {
+    width: 105px;
+    height: 105px;
+  }
+
+  .service-image-wrapper img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .developer-card {
+    padding: 30px 20px;
+  }
+
+  .developer-image {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 25px;
+  }
+
+  .developer-name {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .developer-info strong {
+    width: 75px;
+  }
+
+  .map-wrapper iframe {
+    height: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .nav-btn {
+    padding: 6px 9px;
+    font-size: 0.75rem;
+  }
+
+  .brand span {
+    display: none;
+  }
+
+  .hero-carousel {
+    border-radius: 0;
+  }
+
+  .hero-carousel .carousel-item {
+    height: 230px;
+  }
+}

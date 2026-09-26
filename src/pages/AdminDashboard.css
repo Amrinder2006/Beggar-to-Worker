@@ -1,0 +1,28 @@
+body {
+  background: #f5f7fa;
+}
+
+.dashboard-title {
+  font-weight: 700;
+  text-decoration: underline;
+  font-size: 1.3rem;
+}
+
+.dashboard-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.dashboard-card img {
+  border-radius: 50%;
+  border: 2px solid #eee;
+  padding: 5px;
+  background: white;
+}

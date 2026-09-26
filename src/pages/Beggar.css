@@ -1,0 +1,47 @@
+.beggar-page {
+  background: #f4f6f9;
+  min-height: 100vh;
+}
+
+.beggar-page .form-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+}
+
+.beggar-page .section-title {
+  font-weight: 600;
+  border-bottom: 2px solid #0d6efd;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+.beggar-page .preview-box {
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  margin: 0 auto;
+}
+
+.beggar-page .preview-box img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.beggar-page .btn-upload {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.beggar-page .btn-main {
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: 500;
+}

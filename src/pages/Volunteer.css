@@ -1,0 +1,42 @@
+.volunteer-page {
+  background: #f4f6f9;
+  min-height: 100vh;
+}
+
+.volunteer-page .form-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+}
+
+.volunteer-page .section-title {
+  font-weight: 600;
+  border-bottom: 2px solid #0d6efd;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+}
+
+.volunteer-page .upload-box {
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  background: #fafafa;
+  text-align: center;
+}
+
+.volunteer-page .upload-box img {
+  width: 100%;
+  max-height: 120px;
+  object-fit: contain;
+}
+
+.volunteer-page .btn-upload {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.volunteer-page .submit-btn {
+  padding: 10px 25px;
+  border-radius: 8px;
+}

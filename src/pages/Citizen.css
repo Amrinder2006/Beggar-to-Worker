@@ -1,0 +1,48 @@
+.citizen-page {
+  background: #f4f6f9;
+  min-height: 100vh;
+}
+
+.citizen-page .main-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+}
+
+.citizen-page .section-title {
+  font-weight: 600;
+  border-bottom: 2px solid #0d6efd;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+}
+
+.citizen-page .upload-box {
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  background: #fafafa;
+}
+
+.citizen-page .upload-box img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+}
+
+.citizen-page .btn-upload {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.citizen-page .form-control,
+.citizen-page .form-select {
+  border-radius: 8px;
+}
+
+.citizen-page .submit-btn {
+  padding: 10px 30px;
+  border-radius: 8px;
+  font-weight: 500;
+}
