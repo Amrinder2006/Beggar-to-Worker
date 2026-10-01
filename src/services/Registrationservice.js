@@ -1,8 +1,7 @@
-const BASE_URL = "http://localhost:2006"; // same note as authService.js — set this or use a Vite proxy if ports differ
+const BASE_URL = "http://localhost:2006"; 
 
 async function postFormData(path, formData) {
-  // No Content-Type header here on purpose — the browser sets the correct
-  // multipart boundary automatically when the body is a FormData instance.
+
   const res = await fetch(`${BASE_URL}${path}`, {
     method: "POST",
     body: formData,
@@ -29,7 +28,7 @@ export function updateVolunteer(formData) {
 }
 
 export async function changePassword({ email, oldpass, newpass }) {
-  const url = new URL(`${BASE_URL}/chngpass`, window.location.origin);
+  const url = new URL(`${BASE_URL}/chngpass`);
   url.searchParams.set("Email", email);
   url.searchParams.set("oldpass", oldpass);
   url.searchParams.set("newpass", newpass);

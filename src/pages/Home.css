@@ -1,4 +1,4 @@
-/* Scoped to the Home page. Bootstrap CSS/JS still come from index.html (CDN or npm import) — see notes below. */
+
 
 .home-page {
   --primary: #1f2a44;
@@ -17,7 +17,7 @@
   line-height: 1.6;
 }
 
-/* ================= NAVBAR ================= */
+
 
 .main-navbar {
   background: rgba(31, 42, 68, 0.98);
@@ -76,7 +76,7 @@
   color: white;
 }
 
-/* ================= HERO ================= */
+
 
 .hero-section {
   padding: 24px 0 0;
@@ -120,7 +120,7 @@
   background: rgba(249, 115, 22, 0.9);
 }
 
-/* ================= COMMON SECTION ================= */
+
 
 .home-page .section {
   padding: 80px 0;
@@ -154,7 +154,7 @@
   margin: 0 auto 45px;
 }
 
-/* ================= SERVICES ================= */
+
 
 .service-card {
   height: 100%;
@@ -171,11 +171,7 @@
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.13);
 }
 
-/* CHANGED: the three source icons (colorful outline, flat black badge, flat
-   black silhouette) were all visually different styles, which made the
-   section look like mismatched stock clip-art. Wrapping each in the same
-   colored circular badge unifies them regardless of the icon's own style,
-   and echoes the accent color used in the navbar/hero for consistency. */
+
 .service-image-wrapper {
   height: 200px;
   padding: 0;
@@ -207,9 +203,7 @@
   width: 78px;
   height: 78px;
   object-fit: contain;
-  /* Normalizes mixed-color source icons (colorful + solid black) to a single
-     consistent tone so they read as one icon set instead of three unrelated
-     images. Remove this filter if you swap in a matching icon set later. */
+ 
   filter: grayscale(1) brightness(0) saturate(100%) invert(20%) sepia(15%)
     saturate(900%) hue-rotate(180deg) brightness(95%) contrast(90%);
   opacity: 0.9;
@@ -232,7 +226,7 @@
   margin-bottom: 0;
 }
 
-/* ================= DEVELOPER ================= */
+
 
 .developer-card {
   max-width: 950px;
@@ -305,7 +299,7 @@
   border: 0;
 }
 
-/* ================= CONTACT ================= */
+
 
 .contact-section {
   background: var(--light);
@@ -356,7 +350,7 @@
   margin: 0;
 }
 
-/* ================= FOOTER ================= */
+
 
 .footer {
   background: var(--primary);
@@ -388,7 +382,7 @@
   font-size: 0.9rem;
 }
 
-/* ================= MODALS ================= */
+
 
 .home-page .modal-content {
   border: none;
@@ -447,7 +441,7 @@
   background: var(--accent-dark);
 }
 
-/* ================= RESPONSIVE ================= */
+
 
 @media (max-width: 768px) {
   .main-navbar {

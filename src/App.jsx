@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
 
 import Home from './pages/Home.jsx'
-import Signup from './pages/Signup.jsx'
+
 import Volunteer from './pages/Volunteer.jsx'
 import VolunteerDashboard from './pages/VolunteerDashboard.jsx'
 import Beggar from './pages/Beggar.jsx'
@@ -19,11 +19,7 @@ import Find from './pages/Find.jsx'
 function App() {
   const location = useLocation();
 
-  // Bootstrap's modal JS appends a .modal-backdrop div to <body> and adds a
-  // "modal-open" class + inline styles when a modal is shown. If we navigate
-  // away (e.g. after login) before Bootstrap finishes its own close/hide
-  // cleanup, that backdrop and body styling get orphaned and block clicks
-  // on whatever page loads next. This strips them out on every route change.
+
   useEffect(() => {
     document.body.classList.remove("modal-open");
     document.body.style.removeProperty("overflow");
@@ -34,7 +30,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/signup" element={<Signup />} />
+  
       <Route path="/volunteercred" element={<Volunteer />} />
       <Route path="/voldash" element={<VolunteerDashboard />} />
       <Route path="/beggarcred" element={<Beggar />} />

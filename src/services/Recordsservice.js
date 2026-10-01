@@ -3,12 +3,10 @@ const BASE_URL = "http://localhost:2006";
 async function getJSON(path) {
   const res = await fetch(`${BASE_URL}${path}`);
   const text = await res.text();
-
   let data;
   try {
     data = JSON.parse(text);
   } catch {
-    // Backend sent a plain error string instead of JSON (e.g. a SQL error message)
     throw new Error(text || "Request failed");
   }
 
@@ -28,7 +26,7 @@ async function postJSON(path, body) {
   try {
     data = JSON.parse(text);
   } catch {
-    data = text; // some routes reply with a plain string ("Updated Successfully" etc.)
+    data = text; 
   }
 
   if (!res.ok) throw new Error(typeof data === "string" ? data : "Request failed");

@@ -69,7 +69,6 @@ export default function Citizen() {
             {error && <div className="alert alert-danger">{error}</div>}
 
             <div className="row g-4">
-              {/* Aadhar Upload */}
               <div className="col-md-4">
                 <div className="section-title">Aadhar Upload</div>
 
@@ -98,7 +97,7 @@ export default function Citizen() {
                 </div>
               </div>
 
-              {/* Form Fields */}
+              
               <div className="col-md-8">
                 <div className="section-title">Personal Information</div>
 
@@ -201,7 +200,7 @@ export default function Citizen() {
               </div>
             </div>
 
-            {/* Submit */}
+            
             <div className="text-center mt-4">
               <button type="submit" className="btn btn-primary submit-btn">
                 Submit Profile

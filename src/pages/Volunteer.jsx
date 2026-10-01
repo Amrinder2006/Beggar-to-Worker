@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { submitVolunteer, updateVolunteer } from "../services/registrationService";
+import { submitVolunteer, updateVolunteer } from "../services/Registrationservice";
 import "./Volunteer.css";
 
 export default function Volunteer() {
@@ -76,9 +76,7 @@ export default function Volunteer() {
     }
   }
 
-  // The original "Fetch" button had no handler wired up in the source HTML either —
-  // kept as a no-op placeholder so the layout matches; wire this up if it's meant
-  // to pull existing volunteer details for this email.
+  
   function handleFetch(e) {
     e.preventDefault();
   }
@@ -106,7 +104,7 @@ export default function Volunteer() {
               </div>
             </div>
 
-            {/* Personal Info */}
+           
             <div className="section-title">Personal Information</div>
 
             <div className="row g-3">

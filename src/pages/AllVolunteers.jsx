@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchVolunteers } from "../services/recordsService";
+import { fetchVolunteers } from "../services/Recordsservice";
 import "./RecordsTable.css";
 
 export default function AllVolunteers() {

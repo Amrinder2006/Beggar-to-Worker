@@ -5,7 +5,7 @@ var fileuploader = require("express-fileupload");
 const cloudinary = require("cloudinary").v2;
 var sql = require("mysql2");
 const bcrypt = require("bcrypt");
-const cors = require("cors"); // needed so React (different port/origin) can call this API
+const cors = require("cors"); 
 require("dotenv").config();
 cloudinary.config({
   cloud_name: "dlrwcm7ji",
@@ -14,9 +14,7 @@ cloudinary.config({
 });
 
 
-
-// ----------------------- Middleware -----------------------
-app.use(cors()); // allow cross-origin requests from your React dev server
+app.use(cors()); 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(fileuploader());
@@ -44,12 +42,7 @@ app.listen(2006, function () {
   console.log(__dirname);
 });
 
-// -----------------------------------------------------------
-// REMOVED: individual page-serving routes like app.get("/signup"),
-// app.get("/voldash"), app.get("/admindash"), app.get("/allvol"), etc.
-// React Router now owns client-side routing for all of these paths.
-// See the catch-all route at the bottom of this file instead.
-// -----------------------------------------------------------
+
 
 app.post("/submit-process", async function (req, resp) {
   const hashedPassword = await bcrypt.hash(req.body.Password, 10);
@@ -252,23 +245,9 @@ app.post("/begsubmit-process", async function (req, resp) {
             .then(async function (result) {
               proofname = result.url;
               console.log("Proof Uploaded:", proofname);
-
-              aiJsonData = await AIFUNCTION(result.url);
-
-              console.log("AI DATA:", aiJsonData);
-
-              Name = aiJsonData.name || Name;
-              Gender = aiJsonData.gender || Gender;
-              proofno = aiJsonData.adhaar_number || proofno;
-
-              if (aiJsonData.dob) {
-                const birthYear = new Date(aiJsonData.dob).getFullYear();
-                const currentYear = new Date().getFullYear();
-                Age = currentYear - birthYear;
-              }
             });
         } catch (err) {
-          console.log("Cloudinary/AIFunction Error:", err.message);
+          console.log("Cloudinary Error:", err.message);
         }
       }
       if (selfurl) {
@@ -306,8 +285,6 @@ app.post("/begsubmit-process", async function (req, resp) {
       ],
       function (err) {
         if (!err) {
-          // CHANGED: previously sent index.html directly. React handles
-          // navigation client-side, so just confirm success instead.
           resp.send("Submitted Successfully");
         } else {
           resp.send(err.message);
@@ -323,7 +300,7 @@ app.post("/begsubmit-process", async function (req, resp) {
 app.post("/begupdate-process", async function (req, resp) {
   let Email = req.body.email;
   let Name = req.body.name;
-  let Age = req.body.age; // FIXED: was req.body.age.age (bug in original)
+  let Age = req.body.age;
   let Gender = req.body.gen;
   let Address = req.body.address;
   let City = req.body.city;
@@ -578,8 +555,6 @@ app.post("/Citizen-Profile", async function (req, resp) {
   );
 });
 
-//----------------------- Find worker ------------------------------
-
 app.get("/angularfetchwork", function (req, resp) {
   MYSQ.query(
     "select distinct type from Begprofile ",
@@ -602,19 +577,21 @@ app.get("/fetchworker", function (req, resp) {
   let work = req.query.type;
   let city = req.query.city;
 
-  let query = "SELECT * FROM Begprofile WHERE type=? AND city=?";
-
-  MYSQ.query(query, [work, city], function (err, result) {
-    if (err) {
-      resp.send(err);
-    } else {
-      resp.send(result);
-    }
-  });
+  MYSQ.query(
+    "SELECT * FROM Begprofile WHERE type=? AND city=?",
+    [work, city],
+    function (err, result) {
+      if (err) {
+        resp.send(err);
+      } else {
+        resp.send(result);
+      }
+    },
+  );
 });
 
 app.get("/angularfetchBaggers", function (req, resp) {
-  // FIXED: was "MysqlCon" (undefined variable) — original bug, corrected to MYSQ
+ 
   MYSQ.query("select * from baggers", function (err, tableInJsonArray) {
     if (!err) {
       resp.send(tableInJsonArray);
@@ -624,26 +601,8 @@ app.get("/angularfetchBaggers", function (req, resp) {
   });
 });
 
-// -----------------------------------------------------------
-// ADDED: Serve the built React app in production, and let
-// React Router handle all non-API routes via a catch-all.
-//
-// IMPORTANT: Adjust the folder name below ("../dist" or "../build")
-// to match wherever your React build output actually lands.
-// - Vite projects build to "dist" by default
-// - Create React App projects build to "build" by default
-//
-// During local development you likely won't hit this at all —
-// you'll run React separately with `npm run dev` on its own port,
-// and it'll call this Express server directly (thanks to the cors()
-// middleware added above). This block only matters once you're
-// ready to deploy / run a production build.
-// -----------------------------------------------------------
 app.use(express.static(path.join(__dirname, "../dist")));
 
-// FIXED: bare "*" is no longer valid route syntax in Express 5 / path-to-regexp v7.
-// A path-less app.use() catches anything not already handled above, which
-// works the same way across Express versions.
 app.use(function (req, resp) {
   resp.sendFile(path.join(__dirname, "../dist", "index.html"));
 });

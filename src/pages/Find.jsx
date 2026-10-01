@@ -11,7 +11,7 @@ export default function Find() {
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedWorker, setSelectedWorker] = useState({});
 
-  // Runs once on mount — equivalent of ng-init="FindType();FindCity();"
+  
   useEffect(() => {
     fetchWorkTypes().then(setWorkTypes).catch(() => setWorkTypes([]));
     fetchCities().then(setCities).catch(() => setCities([]));
@@ -27,20 +27,18 @@ export default function Find() {
   }
 
   function handleShowDetails(worker) {
-    // Sets state so the modal (opened by Bootstrap's own data-bs-toggle
-    // attribute below) shows this worker's details.
+    
     setSelectedWorker(worker);
   }
 
   return (
     <div style={{ background: "#f5f7fa", minHeight: "100vh" }}>
-      {/* Header */}
+      
       <div className="header-bar bg-white shadow-sm p-3 text-center fw-semibold">
         <h4 className="mb-0">Find Workers</h4>
       </div>
 
       <div className="container py-4">
-        {/* Filters */}
         <div className="filter-card bg-white rounded-3 p-4 shadow-sm mb-4">
           <div className="row g-3 align-items-end">
             <div className="col-md-4">
@@ -79,7 +77,7 @@ export default function Find() {
           </div>
         </div>
 
-        {/* Cards */}
+       
         <div className="row g-4">
           {workers.map((obj, i) => (
             <div className="col-md-4 col-lg-3" key={i}>

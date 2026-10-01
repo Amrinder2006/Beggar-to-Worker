@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchCitizens } from "../services/recordsService";
+import { fetchCitizens } from "../services/Recordsservice";
 import "./RecordsTable.css";
 
 function formatDate(value) {

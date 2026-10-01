@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { changePassword } from "../services/registrationService";
+import { changePassword } from "../services/Registrationservice";
 import "./CitizenDashboard.css";
 
 export default function CitizenDashboard() {
@@ -45,7 +45,7 @@ export default function CitizenDashboard() {
             width="45"
             alt="Beggar to Worker logo"
           />
-          <span className="brand-title">Beggar to Worker</span>
+          <span className="brand-title">Worker Union</span>
         </div>
 
         <div className="d-flex align-items-center gap-2">
@@ -75,24 +75,11 @@ export default function CitizenDashboard() {
             </div>
           </div>
 
-          <div className="col-md-4 col-lg-3">
-            <div className="card text-center p-3 citdash-card">
-              <h5>Beggar Details</h5>
-              <img
-                src="https://image2url.com/r2/default/images/1771851671294-0d8c96d3-d591-414f-b8a3-eb9058c2c37b.png"
-                width="140"
-                className="mx-auto my-3"
-                alt="Beggar Details"
-              />
-              <button className="btn btn-primary w-100" onClick={() => navigate("/Beggarcred")}>
-                Open
-              </button>
-            </div>
-          </div>
+    
 
           <div className="col-md-4 col-lg-3">
             <div className="card text-center p-3 citdash-card">
-              <h5>Beggar Finder</h5>
+              <h5>Worker Finder</h5>
               <img
                 src="https://static.vecteezy.com/system/resources/previews/016/329/823/original/3d-illustration-business-manager-png.png"
                 width="140"
@@ -137,7 +124,7 @@ export default function CitizenDashboard() {
         </div>
       </div>
 
-      {/* Change Password Modal */}
+      
       <div className="modal fade" id="changeModal" tabIndex="-1" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">

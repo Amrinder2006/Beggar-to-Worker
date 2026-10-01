@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { changePassword } from "../services/RegistrationService.js";
+import { changePassword } from "../services/Registrationservice.js";
 import "./AdminDashboard.css";
 
 export default function AdminDashboard() {
@@ -45,7 +45,7 @@ export default function AdminDashboard() {
             height="45"
             alt="Beggar to Worker logo"
           />
-          <span className="dashboard-title">Beggar to Worker</span>
+          <span className="dashboard-title">Workers Union</span>
         </a>
       </nav>
 
@@ -70,24 +70,7 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          <div className="col-md-4 col-lg-3">
-            <div className="card text-center p-3 dashboard-card">
-              <h5 className="mb-3">Volunteers</h5>
-              <img
-                src="https://image2url.com/r2/default/images/1772464726685-4026f98f-a577-45f7-b135-67c055afc444.png"
-                width="150"
-                height="150"
-                className="mx-auto mb-3"
-                alt="Volunteers"
-              />
-              <button
-                className="btn btn-primary w-100"
-                onClick={() => navigate("/allvol")}
-              >
-                Volunteers
-              </button>
-            </div>
-          </div>
+
 
           <div className="col-md-4 col-lg-3">
             <div className="card text-center p-3 dashboard-card">
@@ -110,7 +93,7 @@ export default function AdminDashboard() {
 
           <div className="col-md-4 col-lg-3">
             <div className="card text-center p-3 dashboard-card">
-              <h5 className="mb-3">Beggars</h5>
+              <h5 className="mb-3">Workers</h5>
               <img
                 src="https://cdn-icons-png.flaticon.com/512/4888/4888756.png"
                 width="150"
@@ -122,12 +105,11 @@ export default function AdminDashboard() {
                 className="btn btn-primary w-100"
                 onClick={() => navigate("/allbeg")}
               >
-                Beggars
+                Workers
               </button>
             </div>
           </div>
 
-          {/* Change password — separated out from Logout, see note in chat */}
           <div className="col-md-4 col-lg-3">
             <div className="card text-center p-3 dashboard-card">
               <h5 className="mb-3">Change Password</h5>

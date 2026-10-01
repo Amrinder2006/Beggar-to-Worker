@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchAllUsers, blockUser, resumeUser } from "../services/recordsService";
+import { fetchAllUsers, blockUser, resumeUser } from "../services/Recordsservice";
 import "./RecordsTable.css";
 
 export default function AllUsers() {

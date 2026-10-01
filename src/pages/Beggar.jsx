@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { submitBeggar, updateBeggar } from "../services/registrationService";
+import { submitBeggar, updateBeggar } from "../services/Registrationservice";
 import "./Beggar.css";
 
 const WORK_TYPES = ["Gardener", "Cleaner", "Care-taker", "Washer"];
@@ -96,7 +96,7 @@ export default function Beggar() {
       <div className="container">
         <div className="form-card">
           <form>
-            <h3 className="text-center mb-4 fw-bold">Beggar Registration</h3>
+            <h3 className="text-center mb-4 fw-bold">Worker Registration</h3>
 
             {error && <div className="alert alert-danger">{error}</div>}
 

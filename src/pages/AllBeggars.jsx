@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchBeggars } from "../services/recordsService";
+import { fetchBeggars } from "../services/Recordsservice";
 import "./RecordsTable.css";
 
 export default function AllBeggars() {
@@ -19,7 +19,7 @@ export default function AllBeggars() {
         <div className="row mb-4">
           <div className="col-md-12">
             <div className="card header-card text-center bg-primary text-white p-3">
-              <h3 className="mb-0">All Beggar Records</h3>
+              <h3 className="mb-0">All Worker Records</h3>
             </div>
           </div>
         </div>

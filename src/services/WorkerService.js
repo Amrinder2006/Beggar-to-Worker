@@ -1,7 +1,7 @@
-const BASE_URL = "http://localhost:2006"; // same as authService — set this or use a Vite proxy if frontend/backend run on different ports
+const BASE_URL = "http://localhost:2006"; 
 
 async function getJSON(path, params) {
-  const url = new URL(`${BASE_URL}${path}`, window.location.origin);
+  const url = new URL(`${BASE_URL}${path}`);
   if (params) {
     Object.entries(params).forEach(([key, value]) => url.searchParams.set(key, value));
   }

@@ -6,7 +6,7 @@ import "./Home.css";
 export default function Home() {
   const navigate = useNavigate();
 
-  // ---- Signup form state ----
+
   const [signupData, setSignupData] = useState({
     username: "",
     email: "",
@@ -15,29 +15,23 @@ export default function Home() {
   });
   const [signupError, setSignupError] = useState("");
 
-  // ---- Login form state ----
+  
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [loginError, setLoginError] = useState("");
 
-  // ---- Admin login form state ----
+  
   const [adminData, setAdminData] = useState({ email: "", password: "" });
   const [adminError, setAdminError] = useState("");
 
   function closeModal(id) {
-    // Bootstrap's own JS (bundle) exposes this global; no jQuery needed.
-    const modalEl = document.getElementById(id);
-    const instance = window.bootstrap?.Modal.getInstance(modalEl);
+    const modalact = document.getElementById(id);
+    const instance = window.bootstrap?.Modal.getInstance(modalact);
     instance?.hide();
   }
 
   async function handleSignup(e) {
     e.preventDefault();
     setSignupError("");
-
-    if (!e.target.checkValidity()) {
-      e.target.reportValidity();
-      return;
-    }
 
     try {
       const resp = await signup(signupData);
@@ -96,7 +90,7 @@ export default function Home() {
 
   return (
     <div className="home-page">
-      {/* ================= NAVBAR ================= */}
+      
       <nav className="navbar main-navbar">
         <div className="container-fluid px-3 px-md-4">
           <a href="/" className="brand">
@@ -104,7 +98,7 @@ export default function Home() {
               src="https://image2url.com/r2/default/images/1771851558508-3b4fd333-800f-48c2-99a3-6f3421bb38be.png"
               alt="Beggar 2 Worker logo"
             />
-            <span>Beggar 2 Worker</span>
+            <span>Workers Union</span>
           </a>
 
           <div className="nav-actions">
@@ -121,19 +115,19 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* ================= HERO ================= */}
+      
       <section className="hero-section">
         <div id="carouselExampleControls" className="carousel slide hero-carousel" data-bs-ride="carousel">
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
-                src="https://pub-1407f82391df4ab1951418d04be76914.r2.dev/uploads/121bd807-b629-4e3e-a3dd-af28f5550690.png"
+                src="https://www.image2url.com/r2/default/images/1790869220826-88c76b51-4c31-417f-b898-b89c45e71f6b.png"
                 alt="Beggar 2 Worker"
               />
             </div>
             <div className="carousel-item">
               <img
-                src="https://www.image2url.com/r2/default/images/1777627456800-442f9838-70b5-4cc1-8f17-0707af13e25a.png"
+                src="https://www.image2url.com/r2/default/images/1790869514707-ac691a41-6524-455a-a2e9-da80e2b181d1.png"
                 alt="Beggar 2 Worker services"
               />
             </div>
@@ -148,7 +142,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= SERVICES ================= */}
+      
       <section className="section">
         <div className="container">
           <h2 className="section-title">Our Services</h2>
@@ -216,7 +210,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= DEVELOPER ================= */}
+      
       <section className="section section-light">
         <div className="container">
           <h2 className="section-title">Meet Our Developer</h2>
@@ -248,7 +242,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= LOCATION ================= */}
+      
       <section className="section">
         <div className="container">
           <h2 className="section-title">Reach Us</h2>
@@ -267,7 +261,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= CONTACT ================= */}
+      
       <section className="section contact-section">
         <div className="container">
           <h2 className="section-title">Contact Us</h2>
@@ -287,27 +281,27 @@ export default function Home() {
               <div className="contact-card text-center">
                 <div className="contact-icon email-icon">✉</div>
                 <h3>Email</h3>
-                <p>support@beggar2worker.com</p>
+                <p>support@workerunion.com</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ================= FOOTER ================= */}
+      
       <footer className="footer">
         <div className="container text-center">
-          <h3 className="footer-title">Beggar 2 Worker</h3>
+          <h3 className="footer-title">Worker Union</h3>
           <p className="footer-description">
-            Empowering individuals to move from begging to meaningful work through opportunities, support, and
+            Empowering individuals to meaningful work through opportunities, support, and
             dignity-driven initiatives.
           </p>
           <div className="footer-divider"></div>
-          <p className="copyright mb-0">© 2026 Beggar 2 Worker. All rights reserved.</p>
+          <p className="copyright mb-0">© Worker Union. All rights reserved.</p>
         </div>
       </footer>
 
-      {/* ================= SIGNUP MODAL ================= */}
+      
       <div className="modal fade" id="signupModal" tabIndex="-1" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
@@ -351,7 +345,7 @@ export default function Home() {
                   onChange={(e) => setSignupData({ ...signupData, userType: e.target.value })}
                 >
                   <option value="" disabled>Select User Type</option>
-                  <option value="Volunteer">Volunteer</option>
+                  <option value="Volunteer">Worker</option>
                   <option value="Citizen">Citizen</option>
                 </select>
               </div>
@@ -366,7 +360,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ================= LOGIN MODAL ================= */}
+      
       <div className="modal fade" id="loginModal" tabIndex="-1" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
@@ -407,7 +401,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ================= ADMIN MODAL ================= */}
+     
       <div className="modal fade" id="AdminModal" tabIndex="-1" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
