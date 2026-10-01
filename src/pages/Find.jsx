@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchWorkTypes, fetchCities, fetchWorkers } from "../services/workerService";
+import { fetchWorkTypes, fetchCities, fetchWorkers } from "../services/WorkerService";
 import "./Find.css";
 
 export default function Find() {
