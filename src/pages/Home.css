@@ -511,11 +511,12 @@
 
   .developer-name {
     font-size: 1.6rem;
-    text-align: center;
+    text-align: left;
   }
 
   .developer-info strong {
     width: 75px;
+    text-align: left;
   }
 
   .map-wrapper iframe {
