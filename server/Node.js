@@ -144,75 +144,83 @@ app.post("/submitcred", async function (req, resp) {
   }
 });
 
+const fs = require('fs');
+
+
 app.post("/updatecred", async function (req, resp) {
-  let Email = req.body.Email;
-  let Name = req.body.name;
-  let contact = req.body.contact;
-  let address = req.body.Address;
-  let city = req.body.city;
-  let gender = req.body.gen;
-  let occu = req.body.occu;
-  let adhar = req.files.adhar;
-  let prof = req.files.profile;
-  let adharname = "";
-  let profname = "";
-  MYSQ.query(
-    "select * from Volprofile where emailid=?",
-    [Email],
-    async function (err, resarr) {
-      if (resarr.length == 1) {
-        adharname = resarr[0].adharurl;
-        profname = resarr[0].picurl;
-        console.log(adharname);
-        console.log(profname);
-      }
-    },
-  );
+  try {
+    let Email = req.body.Email;
+    let Name = req.body.name;
+    let contact = req.body.contact;
+    let address = req.body.Address;
+    let city = req.body.city;
+    let gender = req.body.gen;
+    let occu = req.body.occu;
 
-  if (req.files != null) {
-    if (adhar) {
-      adharname = adhar.name;
+  
+    let adhar = (req.files && req.files.adhar) ? req.files.adhar : null;
+    let prof = (req.files && req.files.profile) ? req.files.profile : null;
 
-      let fullPath = __dirname + "/upload/" + adharname;
+    let adharname = "";
+    let profname = "";
 
-      adhar.mv(fullPath);
-
-      await cloudinary.uploader.upload(fullPath).then(function (result) {
-        adharname = result.url;
-
-        console.log("Profile uploaded:", adharname);
+ 
+    const existingData = await new Promise((resolve, reject) => {
+      MYSQ.query("select * from Volprofile where emailid=?", [Email], (err, resarr) => {
+        if (err) return reject(err);
+        if (resarr.length === 1) {
+          resolve({ adharurl: resarr[0].adharurl, picurl: resarr[0].picurl });
+        } else {
+          resolve({ adharurl: "", picurl: "" });
+        }
       });
+    });
+
+    adharname = existingData.adharurl;
+    profname = existingData.picurl;
+
+  
+    const uploadDir = path.join(__dirname, "upload");
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir);
+    }
+
+  
+    if (adhar) {
+      let fullPath = path.join(uploadDir, adhar.name);
+      await adhar.mv(fullPath); // Wait for file to move
+      const result = await cloudinary.uploader.upload(fullPath);
+      adharname = result.url;
     }
 
     if (prof) {
-      profname = prof.name;
-
-      let fullPath = __dirname + "/upload/" + profname;
-
-      prof.mv(fullPath);
-
-      await cloudinary.uploader.upload(fullPath).then(function (result) {
-        profname = result.url;
-
-        console.log("Aadhaar uploaded:", profname);
-      });
+      let fullPath = path.join(uploadDir, prof.name);
+      await prof.mv(fullPath); // Wait for file to move
+      const result = await cloudinary.uploader.upload(fullPath);
+      profname = result.url;
     }
-  }
-  MYSQ.query(
-    "update Volprofile set name=?,contact=?,address=?,city=?,gender=?,occupation=?,adharurl=?,picurl=? where emailid=?",
-    [Name, contact, address, city, gender, occu, adharname, profname, Email],
-    function (err, resarr) {
-      if (!err) {
-        resp.send("Updated Successfully");
-      } else {
-        resp.send(err.message);
+
+   
+    MYSQ.query(
+      "update Volprofile set name=?,contact=?,address=?,city=?,gender=?,occupation=?,adharurl=?,picurl=? where emailid=?",
+      [Name, contact, address, city, gender, occu, adharname, profname, Email],
+      function (err, resarr) {
+        if (!err) {
+          resp.send("Updated Successfully");
+        } else {
+          resp.send(err.message);
+        }
       }
-    },
-  );
+    );
+
+  } catch (error) {
+    console.error("Update Error:", error);
+    resp.status(500).send("Internal Server Error: " + error.message);
+  }
 });
 
 app.post("/begsubmit-process", async function (req, resp) {
-  let aiJsonData = {};
+ 
 
   let Email = req.body.email;
   let Name = req.body.name;
