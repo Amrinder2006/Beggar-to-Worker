@@ -5,10 +5,12 @@ import "./VolunteerDashboard.css";
 
 export default function VolunteerDashboard() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const activeUserEmail = localStorage.getItem("activeuser") || "";
+  
+  const [email, setEmail] = useState(activeUserEmail);
 
   const [passData, setPassData] = useState({
-    email: "",
+    email: activeUserEmail,
     oldpass: "",
     newpass: "",
   });
@@ -165,6 +167,7 @@ export default function VolunteerDashboard() {
                   className="form-control mb-3"
                   placeholder="Email"
                   required
+                  disabled
                   value={passData.email}
                   onChange={(e) =>
                     setPassData({ ...passData, email: e.target.value })
