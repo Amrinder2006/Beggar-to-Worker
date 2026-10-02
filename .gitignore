@@ -26,6 +26,6 @@ dist-ssr
 
 server/.env
 server/node_modules/
-server/upload/
+
 node_modules/
 dist/
