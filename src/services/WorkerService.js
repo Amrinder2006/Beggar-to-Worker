@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:2006"; 
+const BASE_URL = import.meta.env.DEV ? "http://localhost:2006" : "";
 
 async function getJSON(path, params) {
   const url = new URL(`${BASE_URL}${path}`);
