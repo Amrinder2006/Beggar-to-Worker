@@ -76,7 +76,6 @@ export default function Volunteer() {
     }
   }
 
-  
   function handleFetch(e) {
     e.preventDefault();
   }
@@ -96,10 +95,8 @@ export default function Volunteer() {
                 <label className="form-label">Email</label>
                 <input type="email" className="form-control" value={email} disabled />
               </div>
+            </div> {/* <-- THIS CLOSING DIV WAS MISSING */}
 
-          
-
-           
             <div className="section-title">Personal Information</div>
 
             <div className="row g-3">
