@@ -97,12 +97,7 @@ export default function Volunteer() {
                 <input type="email" className="form-control" value={email} disabled />
               </div>
 
-              <div className="col-md-6 d-flex align-items-end">
-                <button className="btn btn-outline-primary w-100" onClick={handleFetch}>
-                  Fetch
-                </button>
-              </div>
-            </div>
+          
 
            
             <div className="section-title">Personal Information</div>
