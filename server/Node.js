@@ -565,10 +565,33 @@ app.post("/Citizen-Profile", async function (req, resp) {
 
 app.get("/angularfetchwork", function (req, resp) {
   MYSQ.query(
-    "select distinct type from Begprofile ",
+    "SELECT type FROM Begprofile",
     function (err, tableInJsonArray) {
-      resp.send(tableInJsonArray);
-    },
+      if (err) return resp.status(500).send(err);
+
+      // Parse JSON arrays, flatten them, and get distinct values
+      let allTypes = [];
+      tableInJsonArray.forEach((row) => {
+        try {
+          const parsed = JSON.parse(row.type);
+          if (Array.isArray(parsed)) {
+            allTypes.push(...parsed);
+          } else {
+            allTypes.push(row.type);
+          }
+        } catch (e) {
+          // Fallback if not valid JSON
+          allTypes.push(row.type);
+        }
+      });
+
+      // Remove duplicates
+      const uniqueTypes = [...new Set(allTypes)];
+      
+      // Send back as an array of objects to match your frontend expectation
+      const formattedResponse = uniqueTypes.map(t => ({ type: t }));
+      resp.send(formattedResponse);
+    }
   );
 });
 
@@ -584,17 +607,18 @@ app.get("/angularfetchcity", function (req, resp) {
 app.get("/fetchworker", function (req, resp) {
   let work = req.query.type;
   let city = req.query.city;
-
+  
+  
   MYSQ.query(
-    "SELECT * FROM Begprofile WHERE type=? AND city=?",
-    [work, city],
+    "SELECT * FROM Begprofile WHERE type LIKE ? AND city = ?",
+    [`%${work}%`, city],
     function (err, result) {
       if (err) {
         resp.send(err);
       } else {
         resp.send(result);
       }
-    },
+    }
   );
 });
 
