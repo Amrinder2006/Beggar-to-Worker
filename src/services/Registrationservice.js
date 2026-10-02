@@ -28,12 +28,18 @@ export function updateVolunteer(formData) {
 }
 
 export async function changePassword({ email, oldpass, newpass }) {
-  const url = new URL(`${BASE_URL}/chngpass`);
-  url.searchParams.set("Email", email);
-  url.searchParams.set("oldpass", oldpass);
-  url.searchParams.set("newpass", newpass);
+  
+  const params = new URLSearchParams({
+    Email: email,
+    oldpass: oldpass,
+    newpass: newpass
+  });
 
-  const res = await fetch(url);
+ 
+  const urlString = `${BASE_URL}/chngpass?${params.toString()}`;
+
+  // 3. Fetch
+  const res = await fetch(urlString);
   const text = await res.text();
   if (!res.ok) throw new Error(text || "Request failed");
   return text;
