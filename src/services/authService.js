@@ -1,6 +1,6 @@
 
 
-const BASE_URL = "http://localhost:2006"; 
+const BASE_URL = import.meta.env.DEV ? "http://localhost:2006" : "";
 
 async function postForm(path, data) {
   const res = await fetch(`${BASE_URL}${path}`, {
