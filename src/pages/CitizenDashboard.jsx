@@ -5,9 +5,11 @@ import "./CitizenDashboard.css";
 
 export default function CitizenDashboard() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const activeUserEmail = localStorage.getItem("activeuser") || "";
+  
+  const [email, setEmail] = useState(activeUserEmail);
 
-  const [passData, setPassData] = useState({ email: "", oldpass: "", newpass: "" });
+  const [passData, setPassData] = useState({ email: activeUserEmail, oldpass: "", newpass: "" });
   const [passError, setPassError] = useState("");
 
   useEffect(() => {
@@ -143,6 +145,7 @@ export default function CitizenDashboard() {
                     type="email"
                     className="form-control"
                     required
+                    disabled
                     value={passData.email}
                     onChange={(e) => setPassData({ ...passData, email: e.target.value })}
                   />
